@@ -80,10 +80,10 @@ int SerialValidator(char code[17])
     return 0;
 }
 
-char GenPLID(char code[17])
+char* GenPLID( char code[17])
 {
-    char out[13];
-
+    // Allocate memory for the output string (assuming doubling the length)
+    char* out = (char*)malloc(9);
 
     char subCereal[6];
     subCereal[0] = code[7];
@@ -105,11 +105,36 @@ char GenPLID(char code[17])
 
     int mfgInt = atoi(mfgChar);
 
-    itoa(mfgInt,out,16);
-    itoa(cereal,out+4,16);
-    // sprintf(out, "%X%X", mfgInt, cereal);
+    snprintf(out,9, "%X%X", mfgInt, cereal);
     FURI_LOG_I("TaggIR","PLID: %s", out);
-    return *out;
+    return out;
 }
 
+char* GenType( char code[17])
+{
+    char* out = (char*)malloc(5);
+    out[0] = code[12];
+    out[1] = code[13];
+    out[2] = code[14];
+    out[3] = code[15];
+    out[4] = '\0';
+    return out;
+}
+
+char* GenRes( char code[17])
+{
+    char* out = (char*)malloc(12);
+    int width = 0;
+    int height = 0;
+    char* type = GenType(code);
+
+    if (strcmp(type,"1370")==0)
+    {
+        width= 296;
+        height= 128;
+    }
+
+    snprintf(out,9, "%ix%i", width, height);
+    return out;
+}
 // 296x128 = 37888 which is divisible by 8 (nice)
