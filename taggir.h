@@ -55,6 +55,14 @@ typedef struct {
 } TaggIRApp;
 
 typedef struct {
+    char* res_string;
+    char* description;
+    int width;
+    int height;
+    uint8_t* mode;
+} TaggIRInstance;
+
+typedef struct {
     uint32_t display_color_index; // The team color setting index
     FuriString* barcode_name; // The name setting
     uint8_t x; // The x coordinate

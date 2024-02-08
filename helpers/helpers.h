@@ -6,10 +6,12 @@
 
 #include <furi.h>
 
+#include "../taggir.h"
+
 int SerialValidator(char code[17]);
 
 char* GenPLID(char code[17]);
 
 char* GenType( char code[17]);
 
-char* GenRes(char code[17]);
+TaggIRInstance GenRes(char code[17]);

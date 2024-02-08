@@ -70,8 +70,8 @@ static void TaggIR_submenu_callback(void* context, uint32_t index) {
  * config setting for the color of the display
 */
 static const char* display_color_config_label = "Display Color";
-static uint8_t display_color_values[] = {1, 2, 4};
-static char* display_color_names[] = {"B&W", "3 Color", "RGB"};
+static uint8_t display_color_values[] = {1, 2, 3, 4};
+static char* display_color_names[] = {"Seg", "B&W", "3 Color", "RGB"};
 static void TaggIR_display_color_change(VariableItem* item) {
     TaggIRApp* app = variable_item_get_context(item);
     uint8_t index = variable_item_get_current_value_index(item);
@@ -113,15 +113,15 @@ static void TaggIR_barcode_text_updated(void* context) {
             variable_item_set_current_value_text(
                 app->type_item, type);
 
-            char* res = GenRes(code);
-            FURI_LOG_I("TaggIR","RES: %s", res);
+            TaggIRInstance res = GenRes(code);
+            FURI_LOG_I("TaggIR","RES: %s", res.res_string);
             variable_item_set_current_value_text(
-                app->type_item, res);
+                app->res_item, res.res_string);
 
              char* img = "test.png";
             FURI_LOG_I("TaggIR","RES: %s", img);
             variable_item_set_current_value_text(
-                app->type_item, img);
+                app->img_item, img);
         },
         redraw);
     view_dispatcher_switch_to_view(app->view_dispatcher, TaggIRViewConfigure);
