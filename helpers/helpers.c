@@ -344,7 +344,12 @@ TaggIRInstance GenRes( char code[17])
     }
 
     snprintf(out,9, "%ix%i", width, height);
-    cfg.res_string = out;
+    cfg.res_string = "unknown";
+    if (width > 0 && height > 0){
+        cfg.res_string = out;
+    }else{
+       cfg.res_string = "Segmented"; 
+    }
     cfg.width = width;
     cfg.height = height;
     cfg.mode = &ESLType;

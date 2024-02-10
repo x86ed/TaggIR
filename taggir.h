@@ -48,6 +48,7 @@ typedef struct {
     VariableItem* type_item;
     VariableItem* res_item;
     VariableItem* img_item;
+    VariableItem* desc_item;
     char* temp_buffer; // Temporary buffer for text input
     uint32_t temp_buffer_size; // Size of temporary buffer
 

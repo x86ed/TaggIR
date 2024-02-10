@@ -108,18 +108,22 @@ static void TaggIR_barcode_text_updated(void* context) {
             variable_item_set_current_value_text(
                 app->plid_item, plid);
 
-            char* type = GenType(code);
-            FURI_LOG_I("TaggIR","TYPE: %s", type);
+            TaggIRInstance inst = GenRes(code); 
+            FURI_LOG_I("TaggIR","TYPE: %s",inst.description );
+            variable_item_set_current_value_text(
+                app->type_item, inst.description);
+
+            char* type = GenType(code); 
+            FURI_LOG_I("TaggIR","MODEL: %s",type );
             variable_item_set_current_value_text(
                 app->type_item, type);
 
-            TaggIRInstance res = GenRes(code);
-            FURI_LOG_I("TaggIR","RES: %s", res.res_string);
+            FURI_LOG_I("TaggIR","RES: %s", inst.res_string);
             variable_item_set_current_value_text(
-                app->res_item, res.res_string);
+                app->res_item, inst.res_string);
 
              char* img = "test.png";
-            FURI_LOG_I("TaggIR","RES: %s", img);
+            FURI_LOG_I("TaggIR","img: %s", img);
             variable_item_set_current_value_text(
                 app->img_item, img);
         },
@@ -130,8 +134,11 @@ static void TaggIR_barcode_text_updated(void* context) {
 static const char* plid_config_label = "PLID";
 static const char* plid_default_value = "E7014563";
 
-static const char* type_config_label = "Type";
+static const char* type_config_label = "Model";
 static const char* type_default_value = "1242";
+
+static const char* desc_config_label = "Type";
+static const char* desc_default_value = "1242";
 
 static const char* res_config_label = "Reso";
 static const char* res_default_value = "296x128";
@@ -406,6 +413,15 @@ static TaggIRApp* taggir_app_alloc() {
         app->variable_item_list_config, type_config_label, 1, NULL, NULL);
     variable_item_set_current_value_text(
         app->type_item, furi_string_get_cstr(type_name));
+    variable_item_list_set_enter_callback(
+        app->variable_item_list_config, TaggIR_setting_item_clicked, app);
+    
+    FuriString* desc_name = furi_string_alloc();
+    furi_string_set_str(desc_name, desc_default_value);
+    app->desc_item = variable_item_list_add(
+        app->variable_item_list_config, desc_config_label, 1, NULL, NULL);
+    variable_item_set_current_value_text(
+        app->desc_item, furi_string_get_cstr(desc_name));
     variable_item_list_set_enter_callback(
         app->variable_item_list_config, TaggIR_setting_item_clicked, app);
     
