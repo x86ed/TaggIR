@@ -134,76 +134,76 @@ TaggIRInstance GenRes( char code[17])
     switch (model)
     {
     case 1206:
-        cfg.description = "(Continuum E2 HCS)";
+        cfg.description = "Continuum E2 HCS";
         ESLType = 1;
         break;
     case 1207:
-        cfg.description = "(Continuum E2 HCN)";
+        cfg.description = "Continuum E2 HCN";
         // plBitDef = 4;
         ESLType = 1;
         break;
 
 
     case 1240:
-        cfg.description = "(Continuum E4 HCS)";
+        cfg.description = "Continuum E4 HCS";
         // plBitDef = 3;
         ESLType = 1;
         break;
     case 1241:
-        cfg.description = "(Continuum E4 HCN)";
+        cfg.description = "Continuum E4 HCN";
         // plBitDef = 0;
         ESLType = 1;
         break;
     case 1242:
-        cfg.description = "(Continuum E4 HCN FZ)";
+        cfg.description = "Continuum E4 HCN FZ";
         // plBitDef = 0;
         ESLType = 1;
         break;
     case 1243:
-        cfg.description = "(Continuum E4 HCW (18410-00))";
+        cfg.description = "Continuum E4 HCW (18410-00)";
         ESLType = 1;
         break;
 
     case 1217:
     case 1265:
-        cfg.description = "(Continuum E5 HCS)";
+        cfg.description = "Continuum E5 HCS";
         // plBitDef = 2;
         ESLType = 1;
         break;
     case 1219:
-        cfg.description = "(Continuum E5 HCN)";
+        cfg.description = "Continuum E5 HCN";
         // plBitDef = 1;
         ESLType = 1;
         break;
 
 
     case 1291:
-        cfg.description = "(FVL Promoline 3-16 (18619-00))";
+        cfg.description = "FVL Promoline 3-16 (18619-00)";
         ESLType = 1;
         break;
 
 
     case 1510:
-        cfg.description = "(SmartTag E5 M)";
+        cfg.description = "SmartTag E5 M";
         // plBitDef = 1;
         ESLType = 1;
         break;
 
 
     case 1300:
-        cfg.description = "(DotMatrix DM3370 172x72)";
+        cfg.description = "DotMatrix DM3370 172x72";
         width = 172;
         height = 72;
         ESLType = 2;
         break;
     case 1276:
-        cfg.description = "(DotMatrix DM90 320x140) EXPERIMENTAL";
+        cfg.description = "DotMatrix DM90 320x140) EXPERIMENTAL";
         width = 320;
         height = 140;
         ESLType = 2;
         break;
     case 1275:
-        cfg.description = "(DotMatrix DM110 320x192 (13400-00)) EXPERIMENTAL";
+        cfg.description = "DotMatrix DM110 320x192 (13400-00)) EXPERIMENTAL";
         width = 320;
         height = 192;
         ESLType = 2;
@@ -212,7 +212,7 @@ TaggIRInstance GenRes( char code[17])
 
     case 1317:
     case 1322:
-        cfg.description = "(SmartTag HD S 152x152)";
+        cfg.description = "SmartTag HD S 152x152";
         width = 152;
         height = 152;
         ESLType = 2;
@@ -220,19 +220,19 @@ TaggIRInstance GenRes( char code[17])
 
 
     case 1318:
-        cfg.description = "(SmartTag HD M 208x112)";
+        cfg.description = "SmartTag HD M 208x112";
         width = 208;
         height = 112;
         ESLType = 2;
         break;
     case 1327:
-        cfg.description = "(SmartTag HD M Red 208x112)";
+        cfg.description = "SmartTag HD M Red 208x112";
         width = 208;
         height = 112;
         ESLType = 3;
         break;
     case 1324:
-        cfg.description = "(SmartTag HD M FZ 208x112) EXPERIMENTAL";
+        cfg.description = "SmartTag HD M FZ 208x112) EXPERIMENTAL";
         width = 208;
         height = 112;
         ESLType = 2;
@@ -240,7 +240,7 @@ TaggIRInstance GenRes( char code[17])
 
 
     case 1315:
-        cfg.description = "(SmartTag HD L 296x128)";
+        cfg.description = "SmartTag HD L 296x128";
         width = 296;
         height = 128;
         ESLType = 2;
@@ -248,20 +248,20 @@ TaggIRInstance GenRes( char code[17])
 
     case 1370: // 2021 revision of the SmartTag HD L Red 296x128 - black housing
     case 1328:
-        cfg.description = "(SmartTag HD L Red 296x128)";
+        cfg.description = "SmartTag HD L Red 296x128";
         width = 296;
         height = 128;
         ESLType = 3;
         break;
     case 1627:
     case 1628:
-        cfg.description = "(SmartTag HD L Red 296x128) ";
+        cfg.description = "SmartTag HD L Red 296x128) ";
         width = 296;
         height = 128;
         ESLType = 3;
         break;
     case 1344:
-        cfg.description = "(SmartTag HD L Yellow 296x128) EXPERIMENTAL";
+        cfg.description = "SmartTag HD L Yellow 296x128) EXPERIMENTAL";
         width = 296;
         height = 128;
         ESLType = 3;
@@ -269,13 +269,13 @@ TaggIRInstance GenRes( char code[17])
 
 
     case 1348:
-        cfg.description = "(SmartTag HD T Red 264x176) EXPERIMENTAL";
+        cfg.description = "SmartTag HD T Red 264x176) EXPERIMENTAL";
         width = 264;
         height = 176;
         ESLType = 3;
         break;
     case 1349:
-        cfg.description = "(SmartTag HD T Yellow 264x176) EXPERIMENTAL";
+        cfg.description = "SmartTag HD T Yellow 264x176) EXPERIMENTAL";
         width = 264;
         height = 176;
         ESLType = 3;
@@ -283,27 +283,27 @@ TaggIRInstance GenRes( char code[17])
 
 
     case 1314:
-        cfg.description = "(SmartTag HD110 400x300) EXPERIMENTAL";
+        cfg.description = "SmartTag HD110 400x300) EXPERIMENTAL";
         width = 400;
         height = 300;
         ESLType = 2;
         break;
     case 1336:
-        cfg.description = "(SmartTag HD110 Red 400x300) EXPERIMENTAL";
+        cfg.description = "SmartTag HD110 Red 400x300) EXPERIMENTAL";
         width = 400;
         height = 300;
         ESLType = 3;
         break;
     case 1339:
     case 1639:
-        cfg.description = "(SmartTag HD S Red 152x152) ";
+        cfg.description = "SmartTag HD S Red 152x152) ";
         width = 152;
         height = 152;
         ESLType = 3;
         break;
 
     case 1351:
-        cfg.description = "(SmartTag HD150 648x480) EXPERIMENTAL";
+        cfg.description = "SmartTag HD150 648x480) EXPERIMENTAL";
         width = 648;
         height = 480;
         ESLType = 2;
@@ -311,7 +311,7 @@ TaggIRInstance GenRes( char code[17])
     case 1371: // 2021 revision of the SmartTag HD150 Red 648x480 - black housing
     case 1353:
     case 1354:
-        cfg.description = "(SmartTag HD150 Red 648x480)";
+        cfg.description = "SmartTag HD150 Red 648x480";
         width = 648;
         height = 480;
         ESLType = 3;
@@ -319,26 +319,26 @@ TaggIRInstance GenRes( char code[17])
 
 
     case 1319:
-        cfg.description = "(SmartTag HD200 800x480) EXPERIMENTAL";
+        cfg.description = "SmartTag HD200 800x480) EXPERIMENTAL";
         width = 800;
         height = 480;
         ESLType = 2;
         break;
     case 1340:
-        cfg.description = "(SmartTag HD200 Red 800x480) EXPERIMENTAL";
+        cfg.description = "SmartTag HD200 Red 800x480) EXPERIMENTAL";
         width = 800;
         height = 480;
         ESLType = 3;
         break;
     case 1346:
-        cfg.description = "(SmartTag HD200 Yellow 800x480) EXPERIMENTAL";
+        cfg.description = "SmartTag HD200 Yellow 800x480) EXPERIMENTAL";
         width = 800;
         height = 480;
         ESLType = 3;
         break;
 
     default:
-        cfg.description = "(incompatible)";
+        cfg.description = "incompatible";
         ESLType = 0;
         break;
     }

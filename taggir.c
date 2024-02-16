@@ -4,6 +4,8 @@
 
 #define TAG "TaggIR"
 
+#define TAGGIR_FOLDER "/ext/taggir_img"
+
 // Change this to BACKLIGHT_AUTO if you don't want the backlight to be continuously on.
 #define BACKLIGHT_AUTO 1
 
@@ -111,7 +113,7 @@ static void TaggIR_barcode_text_updated(void* context) {
             TaggIRInstance inst = GenRes(code); 
             FURI_LOG_I("TaggIR","TYPE: %s",inst.description );
             variable_item_set_current_value_text(
-                app->type_item, inst.description);
+                app->desc_item, inst.description);
 
             char* type = GenType(code); 
             FURI_LOG_I("TaggIR","MODEL: %s",type );
@@ -122,13 +124,39 @@ static void TaggIR_barcode_text_updated(void* context) {
             variable_item_set_current_value_text(
                 app->res_item, inst.res_string);
 
-             char* img = "test.png";
+            char* img = "test.png";
             FURI_LOG_I("TaggIR","img: %s", img);
             variable_item_set_current_value_text(
                 app->img_item, img);
         },
         redraw);
     view_dispatcher_switch_to_view(app->view_dispatcher, TaggIRViewConfigure);
+}
+
+static bool open_esl_image(Stream* stream) {
+    DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
+    bool result = false;
+    FuriString* path;
+    path = furi_string_alloc();
+    furi_string_set(path, TAGGIR_FOLDER);
+
+    DialogsFileBrowserOptions browser_options;
+    dialog_file_browser_set_basic_options(&browser_options, ".png", &I_code_10px);
+    browser_options.base_path = TAGGIR_FOLDER;
+    browser_options.hide_ext = false;
+
+    bool ret = dialog_file_browser_show(dialogs, path, path, &browser_options);
+
+    furi_record_close(RECORD_DIALOGS);
+    if(ret) {
+        if(!file_stream_open(stream, furi_string_get_cstr(path), FSAM_READ, FSOM_OPEN_EXISTING)) {
+            FURI_LOG_E(TAG, "Cannot open file \"%s\"", furi_string_get_cstr(path));
+        } else {
+            result = true;
+        }
+    }
+    furi_string_free(path);
+    return result;
 }
 
 static const char* plid_config_label = "PLID";
@@ -144,7 +172,7 @@ static const char* res_config_label = "Reso";
 static const char* res_default_value = "296x128";
 
 static const char* img_config_label = "Img";
-static const char* img_default_value = "test.png";
+static const char* img_default_value = "none";
 
 /**
  * @brief      Callback when item in configuration screen is clicked.
@@ -192,6 +220,9 @@ static void TaggIR_setting_item_clicked(void* context, uint32_t index) {
 
         // Show text input dialog.
         view_dispatcher_switch_to_view(app->view_dispatcher, TaggIRViewTextInput);
+    }
+    if (index==7){
+        open_esl_image(app->stream);
     }
 }
 
@@ -527,7 +558,12 @@ int32_t taggir_app(void* p) {
     UNUSED(p);
 
     TaggIRApp* app = taggir_app_alloc();
+        Storage* storage = furi_record_open(RECORD_STORAGE);
+    if(!storage_simply_mkdir(storage, TAGGIR_FOLDER)) {
+        FURI_LOG_E(TAG, "Could not create folder %s", TAGGIR_FOLDER);
+    }
     view_dispatcher_run(app->view_dispatcher);
+    furi_record_close(RECORD_STORAGE);
 
     taggir_app_free(app);
     return 0;

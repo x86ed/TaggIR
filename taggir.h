@@ -6,7 +6,9 @@
 #include <gui/modules/text_input.h>
 #include <gui/modules/widget.h>
 #include <gui/modules/variable_item_list.h>
+#include <dialogs/dialogs.h>
 #include <notification/notification.h>
+#include <toolbox/stream/file_stream.h>
 
 // Our application menu has 3 items.  You can add more items if you want.
 typedef enum {
@@ -38,6 +40,7 @@ typedef struct {
     VariableItemList* variable_item_list_config; // The configuration screen
     View* view_game; // The main screen
     Widget* widget_about; // The about screen
+    Stream* stream;
 
     char* esl_barcode;
     char* plid;
