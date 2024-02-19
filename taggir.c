@@ -5,6 +5,7 @@
 #define TAG "TaggIR"
 
 #define TAGGIR_FOLDER "/ext/taggir_img"
+const int pathl = strlen(TAGGIR_FOLDER);
 
 // Change this to BACKLIGHT_AUTO if you don't want the backlight to be continuously on.
 #define BACKLIGHT_AUTO 1
@@ -123,17 +124,15 @@ static void TaggIR_barcode_text_updated(void* context) {
             FURI_LOG_I("TaggIR","RES: %s", inst.res_string);
             variable_item_set_current_value_text(
                 app->res_item, inst.res_string);
-
-            char* img = "test.png";
-            FURI_LOG_I("TaggIR","img: %s", img);
-            variable_item_set_current_value_text(
-                app->img_item, img);
         },
         redraw);
     view_dispatcher_switch_to_view(app->view_dispatcher, TaggIRViewConfigure);
 }
 
-static bool open_esl_image(Stream* stream) {
+/**
+ TODO: figure out why this freezes part of the time.
+*/
+static bool open_esl_image(TaggIRApp* app) {
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
     bool result = false;
     FuriString* path;
@@ -146,13 +145,16 @@ static bool open_esl_image(Stream* stream) {
     browser_options.hide_ext = false;
 
     bool ret = dialog_file_browser_show(dialogs, path, path, &browser_options);
+    FURI_LOG_I("TaggIR","img_path: %s", furi_string_get_cstr(path));
 
     furi_record_close(RECORD_DIALOGS);
     if(ret) {
-        if(!file_stream_open(stream, furi_string_get_cstr(path), FSAM_READ, FSOM_OPEN_EXISTING)) {
+        if(!file_stream_open(app->stream, furi_string_get_cstr(path), FSAM_READ, FSOM_OPEN_EXISTING)) {
             FURI_LOG_E(TAG, "Cannot open file \"%s\"", furi_string_get_cstr(path));
         } else {
             result = true;
+            variable_item_set_current_value_text(
+                app->img_item, furi_string_get_cstr(path));
         }
     }
     furi_string_free(path);
@@ -222,7 +224,7 @@ static void TaggIR_setting_item_clicked(void* context, uint32_t index) {
         view_dispatcher_switch_to_view(app->view_dispatcher, TaggIRViewTextInput);
     }
     if (index==7){
-        open_esl_image(app->stream);
+        open_esl_image(app);
     }
 }
 
@@ -381,6 +383,8 @@ static bool TaggIR_view_game_input_callback(InputEvent* event, void* context) {
 */
 static TaggIRApp* taggir_app_alloc() {
     TaggIRApp* app = (TaggIRApp*)malloc(sizeof(TaggIRApp));
+    app->storage = furi_record_open(RECORD_STORAGE);
+    app->stream = file_stream_alloc(app->storage);
 
     Gui* gui = furi_record_open(RECORD_GUI);
 

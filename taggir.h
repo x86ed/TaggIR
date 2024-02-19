@@ -41,6 +41,7 @@ typedef struct {
     View* view_game; // The main screen
     Widget* widget_about; // The about screen
     Stream* stream;
+    Storage* storage;
 
     char* esl_barcode;
     char* plid;
