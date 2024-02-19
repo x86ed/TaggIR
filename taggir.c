@@ -136,8 +136,14 @@ static bool open_esl_image(TaggIRApp* app) {
     DialogsApp* dialogs = furi_record_open(RECORD_DIALOGS);
     bool result = false;
     FuriString* path;
+    FuriString* rel;
+    FuriString* base;
     path = furi_string_alloc();
     furi_string_set(path, TAGGIR_FOLDER);
+    rel = furi_string_alloc();
+    furi_string_set(rel, ".");
+    base = furi_string_alloc();
+    furi_string_set(base, TAGGIR_FOLDER);
 
     DialogsFileBrowserOptions browser_options;
     dialog_file_browser_set_basic_options(&browser_options, ".png", &I_code_10px);
@@ -153,6 +159,7 @@ static bool open_esl_image(TaggIRApp* app) {
             FURI_LOG_E(TAG, "Cannot open file \"%s\"", furi_string_get_cstr(path));
         } else {
             result = true;
+            furi_string_replace(path,base,rel);
             variable_item_set_current_value_text(
                 app->img_item, furi_string_get_cstr(path));
         }
